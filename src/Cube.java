@@ -2,12 +2,7 @@ import java.util.Random;
 
 public class Cube {
 
-    Cube.Colour[] up;
-    Cube.Colour[] down;
-    Cube.Colour[] left;
-    Cube.Colour[] right;
-    Cube.Colour[] back;
-    Cube.Colour[] front;
+    Cube.Colour[] u, d, l, r, b, f;
 
     public enum Colour {
         G, B, Y, W, R, O
@@ -35,29 +30,104 @@ public class Cube {
 
     Cube(){
 
-        up = up0;
-        down = down0;
-        left = left0;
-        right = right0;
-        back = back0;
-        front = front0;
-        shuffle();
+        u = up0;
+        d = down0;
+        l = left0;
+        r = right0;
+        b = back0;
+        f = front0;
+//        shuffle();
+        //for(int i=0; i<3; i++) frontLeft();
+    }
+
+    public void printCube(){
+        System.out.println("   |"+u[0]+u[1]+u[2]+"|");
+        System.out.println("   |"+u[3]+u[4]+u[5]+"|");
+        System.out.println("   |"+u[6]+u[7]+u[8]+"|");
+        System.out.println("---+---+---");
+        System.out.println(""+l[0]+l[1]+l[2]+"|"+f[0]+f[1]+f[2]+"|"+r[0]+r[1]+r[2]);
+        System.out.println(""+l[3]+l[4]+l[5]+"|"+f[3]+f[4]+f[5]+"|"+r[3]+r[4]+r[5]);
+        System.out.println(""+l[6]+l[7]+l[8]+"|"+f[6]+f[7]+f[8]+"|"+r[6]+r[7]+r[8]);
+        System.out.println("---+---+---");
+        System.out.println("   |"+d[0]+d[1]+d[2]+"|");
+        System.out.println("   |"+d[3]+d[4]+d[5]+"|");
+        System.out.println("   |"+d[6]+d[7]+d[8]+"|");
+        System.out.println("---+---+---");
+        System.out.println("   |"+b[0]+b[1]+b[2]+"|");
+        System.out.println("   |"+b[3]+b[4]+b[5]+"|");
+        System.out.println("   |"+b[6]+b[7]+b[8]+"|");
+        System.out.println();
+
     }
 
     private void shuffle() {
 
-        //TODO shuffling
-/*        Random generator = new Random();
+        //TODO shuffling, the rest (11) of 12 cases
+        /*Random generator = new Random();
 
-        for(int i = 0; i < 100; i++){
-            int actionNumber = generator.nextInt()%6;
+        for(int i=0; i<100; i++){
+            int actionNumber = generator.nextInt()%12;
             switch (actionNumber) {
                 case 0:
-                    move
+                    frontLeft();
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+                case 9:
+                    break;
+                case 10:
+                    break;
+                case 11:
+                    break;
 
             }
         }
-*/
+        */
+    }
+
+    public void frontLeft() {
+        Cube.Colour tmp = f[1];
+        f[1] = f[5];
+        f[5] = f[7];
+        f[7] = f[3];
+        f[3] = tmp;
+
+        tmp = f[0];
+        f[0] = f[2];
+        f[2] = f[8];
+        f[8] = f[6];
+        f[6] = tmp;
+
+        Cube.Colour t1 = u[6], t2 = u[7], t3 = u[8];
+        u[6] = r[0];
+        u[7] = r[3];
+        u[8] = r[6];
+
+        r[0] = d[2];
+        r[3] = d[1];
+        r[6] = d[0];
+
+        d[0] = l[2];
+        d[1] = l[5];
+        d[2] = l[8];
+
+        l[8] = t1;
+        l[5] = t2;
+        l[2] = t3;
     }
 
 
