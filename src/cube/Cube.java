@@ -1,4 +1,4 @@
-import java.util.Random;
+package cube;
 
 public class Cube {
 
@@ -28,16 +28,29 @@ public class Cube {
     };
 
 
-    Cube(){
+    public Cube(String mode) {
 
-        u = up0;
-        d = down0;
-        l = left0;
-        r = right0;
-        b = back0;
-        f = front0;
-//        shuffle();
-        //for(int i=0; i<3; i++) frontLeft();
+        if(mode.equals("solved")) {
+            u = up0;
+            d = down0;
+            l = left0;
+            r = right0;
+            b = back0;
+            f = front0;
+        } else if (mode.equals("random")){
+            u = up0;
+            d = down0;
+            l = left0;
+            r = right0;
+            b = back0;
+            f = front0;
+//            shuffle();
+        } else if(mode.contains("/")){
+
+            //TODO loading from file
+
+        }
+
     }
 
     public void printCube(){
@@ -60,74 +73,16 @@ public class Cube {
 
     }
 
-    private void shuffle() {
+    public boolean checkIfSolved(){
 
-        //TODO shuffling, the rest (11) of 12 cases
-        /*Random generator = new Random();
-
-        for(int i=0; i<100; i++){
-            int actionNumber = generator.nextInt()%12;
-            switch (actionNumber) {
-                case 0:
-                    frontLeft();
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    break;
-                case 6:
-                    break;
-                case 7:
-                    break;
-                case 8:
-                    break;
-                case 9:
-                    break;
-                case 10:
-                    break;
-                case 11:
-                    break;
-
+        int indexes[] = {0,1,2,3,5,6,7,8};
+        Cube.Colour[] [] walls= {u, d, l, r, b, f};
+        for (Cube.Colour[] wall : walls) {
+            for (int i:indexes) {
+                if(wall[i]!=wall[4]) return false;
             }
         }
-        */
-    }
-
-    public void frontLeft() {
-        Cube.Colour tmp = f[1];
-        f[1] = f[5];
-        f[5] = f[7];
-        f[7] = f[3];
-        f[3] = tmp;
-
-        tmp = f[0];
-        f[0] = f[2];
-        f[2] = f[8];
-        f[8] = f[6];
-        f[6] = tmp;
-
-        Cube.Colour t1 = u[6], t2 = u[7], t3 = u[8];
-        u[6] = r[0];
-        u[7] = r[3];
-        u[8] = r[6];
-
-        r[0] = d[2];
-        r[3] = d[1];
-        r[6] = d[0];
-
-        d[0] = l[2];
-        d[1] = l[5];
-        d[2] = l[8];
-
-        l[8] = t1;
-        l[5] = t2;
-        l[2] = t3;
+        return true;
     }
 
 
