@@ -12,6 +12,8 @@ public class Table {
             3) path to file with cube
         */
 
+        System.out.println("Start.");
+
         Cube cube1 = new Cube("solved");
         CubeDynamics cube1Dynamics = new CubeDynamics(cube1);
 
